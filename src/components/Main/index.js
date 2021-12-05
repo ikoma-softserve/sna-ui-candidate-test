@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from "react";
 
-import "./style.css";
-
-import { Button } from "../index";
+import Button from "../Button";
 import Form from "../Form";
+import Table from "../Table";
+
+import "./style.css";
 
 export default function Main() {
   const [isNewEmployeeModeActive, setIsNewEmployeeModeActive] = useState(false);
@@ -14,6 +15,8 @@ export default function Main() {
 
   return (
     <main className={"App-main"}>
+      <Table />
+
       <Button
         label={"Add employee"}
         onClick={handleOnClickAddEmployee}

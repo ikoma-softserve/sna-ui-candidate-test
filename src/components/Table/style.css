@@ -1,0 +1,27 @@
+.App-table {
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 40px;
+}
+
+.App-table td,
+.App-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.App-table tr:hover {
+  background-color: #ddd;
+}
+
+.App-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4caf50;
+  color: white;
+}
