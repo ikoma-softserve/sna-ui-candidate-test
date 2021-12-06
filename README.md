@@ -1,4 +1,4 @@
-# Cisco Secure Network Analytics UI Candidate Test (Ivan Komashnia, ikoma@softserveinc.com)
+#UI Candidate Test (Ivan Komashnia, ikoma@softserveinc.com)
 
 ## Available Scripts
 
