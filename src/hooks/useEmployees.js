@@ -1,9 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { employeesData } from "../data";
 
 export default function useEmployees() {
   const [employeesList, setEmployeesList] = useState([]);
+
+  const handleAddNewEmployee = useCallback(
+    (data) => {
+      employeesList.push(data);
+      setEmployeesList([...employeesList]);
+
+      console.log(employeesList);
+    },
+    [employeesList]
+  );
 
   useEffect(async () => {
     await setEmployeesList(
@@ -16,5 +26,5 @@ export default function useEmployees() {
     );
   }, []);
 
-  return { employeesList };
+  return { employeesList, handleAddNewEmployee };
 }

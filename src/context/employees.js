@@ -6,11 +6,16 @@ import { useEmployees } from "../hooks";
 export const EmployeesContext = createContext({});
 
 export const EmployeesProvider = ({ children }) => {
-  const { employeesList } = useEmployees();
+  const { employeesList, handleAddNewEmployee } = useEmployees();
 
   return createElement(
     EmployeesContext.Provider,
-    { value: { employeesList: employeesList } },
+    {
+      value: {
+        employeesList: employeesList,
+        handleAddNewEmployee: handleAddNewEmployee,
+      },
+    },
     children
   );
 };
