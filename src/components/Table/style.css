@@ -4,14 +4,17 @@
   border-collapse: collapse;
   border: 3px solid #ddd;
   width: 100%;
-  max-width: 1000px;
   margin-bottom: 40px;
+  max-height: 680px;
+  overflow-y: auto;
 }
 
 .App-table td,
 .App-table th {
   border: 1px solid #ddd;
   padding: 8px;
+  position: relative;
+  height: 40px;
 }
 
 .App-table tr:hover {
@@ -24,4 +27,11 @@
   text-align: center;
   background-color: #4caf50;
   color: white;
+}
+
+.App-table td input {
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  z-index: 3;
 }

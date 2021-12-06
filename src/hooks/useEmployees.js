@@ -7,10 +7,9 @@ export default function useEmployees() {
 
   const handleAddNewEmployee = useCallback(
     (data) => {
+      setEmployeesList([...employeesList]);
       employeesList.push(data);
       setEmployeesList([...employeesList]);
-
-      console.log(employeesList);
     },
     [employeesList]
   );
