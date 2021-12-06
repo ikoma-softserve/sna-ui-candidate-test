@@ -3,7 +3,16 @@
   background-color: #282c34;
 }
 
+.App-Charts {
+  display: flex;
+  align-items: center;
+  width: auto;
+}
+
 .App-BarChart {
-  max-width: 50%;
-  margin-left: auto;
+  width: 50%;
+}
+
+.App-PieChart {
+  width: 50%;
 }

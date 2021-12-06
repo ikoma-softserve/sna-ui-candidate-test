@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from "react";
 
 import BarChart from "../BarChart";
+import PieChart from "../PieChart";
 import Table from "../Table";
 
 import { EmployeesContext } from "../../context";
@@ -22,6 +23,36 @@ export default function Main() {
     [employeesList]
   );
 
+  const CEOsCount = useMemo(
+    () =>
+      employeesList.reduce((el, nexEl) => el + (nexEl.jobTitle === "CEO"), 0),
+    [employeesList]
+  );
+
+  const QAsCount = useMemo(
+    () =>
+      employeesList.reduce((el, nexEl) => el + (nexEl.jobTitle === "QA"), 0),
+    [employeesList]
+  );
+
+  const developersCount = useMemo(
+    () =>
+      employeesList.reduce(
+        (el, nexEl) => el + (nexEl.jobTitle === "Developer"),
+        0
+      ),
+    [employeesList]
+  );
+
+  const marketingSpecialistCount = useMemo(
+    () =>
+      employeesList.reduce(
+        (el, nexEl) => el + (nexEl.jobTitle === "Marketing Specialist"),
+        0
+      ),
+    [employeesList]
+  );
+
   return (
     <main className={"App-main"}>
       <Table />
@@ -30,9 +61,14 @@ export default function Main() {
         <BarChart malesCount={malesCount} femalesCount={femalesCount} />
       )}
 
-      <div>
-        <canvas id="myChart" />
-      </div>
+      {CEOsCount && QAsCount && developersCount && marketingSpecialistCount && (
+        <PieChart
+          marketingSpecialistCount={marketingSpecialistCount}
+          developersCount={developersCount}
+          QAsCount={QAsCount}
+          CEOsCount={CEOsCount}
+        />
+      )}
     </main>
   );
 }

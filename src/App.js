@@ -15,8 +15,14 @@ export default function App() {
         </header>
         <Main />
 
-        <div className={"App-BarChart"}>
-          <canvas id="barChart" />
+        <div className={"App-Charts"}>
+          <div className={"App-BarChart"}>
+            <canvas id="barChart" />
+          </div>
+
+          <div className={"App-PieChart"}>
+            <canvas id="pieChart" />
+          </div>
         </div>
       </EmployeesProvider>
     </div>
