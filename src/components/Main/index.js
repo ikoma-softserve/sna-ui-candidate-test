@@ -44,6 +44,8 @@ export default function Main() {
     [employeesList]
   );
 
+  console.log(developersCount, "DEV count");
+
   const marketingSpecialistCount = useMemo(
     () =>
       employeesList.reduce(
@@ -53,22 +55,35 @@ export default function Main() {
     [employeesList]
   );
 
+  const CFOsCount = useMemo(
+    () =>
+      employeesList.reduce((el, nexEl) => el + (nexEl.jobTitle === "CFO"), 0),
+    [employeesList]
+  );
+
   return (
     <main className={"App-main"}>
       <Table />
 
-      {malesCount && femalesCount && (
-        <BarChart malesCount={malesCount} femalesCount={femalesCount} />
-      )}
+      <div className={"App-Charts"}>
+        {malesCount && femalesCount && (
+          <BarChart malesCount={malesCount} femalesCount={femalesCount} />
+        )}
 
-      {CEOsCount && QAsCount && developersCount && marketingSpecialistCount && (
-        <PieChart
-          marketingSpecialistCount={marketingSpecialistCount}
-          developersCount={developersCount}
-          QAsCount={QAsCount}
-          CEOsCount={CEOsCount}
-        />
-      )}
+        {CEOsCount &&
+          QAsCount &&
+          developersCount &&
+          marketingSpecialistCount &&
+          CFOsCount && (
+            <PieChart
+              marketingSpecialistCount={marketingSpecialistCount}
+              developersCount={developersCount}
+              QAsCount={QAsCount}
+              CEOsCount={CEOsCount}
+              CFOsCount={CFOsCount}
+            />
+          )}
+      </div>
     </main>
   );
 }

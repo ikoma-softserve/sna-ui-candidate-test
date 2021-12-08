@@ -2,65 +2,81 @@ import React, { useContext, useCallback, useState } from "react";
 
 import { EmployeesContext } from "../../context";
 
-import "./style.css";
 import Button from "../Button";
+
+import { jobOptions, genderOptions } from "../../config";
+
+import "./style.css";
 
 export default function Table() {
   const { employeesList, handleAddNewEmployee } = useContext(EmployeesContext);
 
   const [newEmployeeData, setNewEmployeeData] = useState({
     name: "",
-    job: "",
-    tenure: undefined,
-    gender: "male",
+    jobTitle: "",
+    tenure: 0,
+    gender: "",
   });
 
   const handleOnClickAddEmployee = useCallback(() => {
     handleAddNewEmployee({
       name: newEmployeeData.name,
-      jobTitle: newEmployeeData.job,
+      jobTitle: newEmployeeData.jobTitle,
       tenure: newEmployeeData.tenure,
       gender: newEmployeeData.gender,
     });
-  }, [newEmployeeData]);
+    console.log(employeesList);
+  }, [newEmployeeData, handleAddNewEmployee]);
 
-  const inputHandler = (e) => {
-    const val = e.target.value;
+  const inputHandler = useCallback(
+    (e) => {
+      const { name, value } = e.target;
 
-    setNewEmployeeData({ ...newEmployeeData, [e.target.name]: val });
-  };
+      setNewEmployeeData({
+        ...newEmployeeData,
+        [name]: value,
+      });
+    },
+    [newEmployeeData]
+  );
 
   const newEmployeeSet = [
     {
       handler: inputHandler,
-      placeholder: "Name",
       type: "text",
       name: "name",
     },
     {
       handler: inputHandler,
-      placeholder: "Job",
       type: "text",
-      name: "job",
+      name: "jobTitle",
+      options: jobOptions,
     },
     {
       handler: inputHandler,
-      placeholder: "Tenure",
       type: "number",
       name: "tenure",
     },
     {
       handler: inputHandler,
-      placeholder: "Gender",
-      type: "option",
+      type: "select",
       name: "gender",
+      options: genderOptions,
     },
   ];
 
   const newEmployeeTdArr = newEmployeeSet.map(
-    ({ handler, placeholder, type, value, name }, idx) => {
-      return (
-        <td key={idx ** 2}>
+    ({ handler, placeholder, type, value, name, isSelect, options }, idx) => (
+      <td key={idx ** 2}>
+        {options ? (
+          <select name={name} value={value} onChange={inputHandler}>
+            {options.map((el, idx) => (
+              <option key={idx} value={el}>
+                {el}
+              </option>
+            ))}
+          </select>
+        ) : (
           <input
             key={idx ** 3}
             type={type}
@@ -69,9 +85,9 @@ export default function Table() {
             value={value}
             name={name}
           />
-        </td>
-      );
-    }
+        )}
+      </td>
+    )
   );
 
   const renderTableData = useCallback(() => {
@@ -89,7 +105,7 @@ export default function Table() {
     tableList.push(<tr key={"set"}>{newEmployeeTdArr}</tr>);
 
     return tableList;
-  }, [employeesList]);
+  }, [employeesList, newEmployeeTdArr]);
 
   const renderTableHeader = useCallback(() => {
     let header = Object.keys(employeesList?.[0] ?? {});

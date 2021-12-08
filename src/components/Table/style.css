@@ -30,15 +30,27 @@
   color: white;
 }
 
-.App-table td input {
+.App-table td input,
+select {
   z-index: 3;
   background: transparent;
   border: none;
   outline: none;
   height: 100%;
   width: 100%;
+  color: #fff;
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size: 30px;
 }
 
-.App-table td input:placeholder {
-  color: white;
+.App-table td select option {
+  background: #8096c2;
+  color: #ffffff;
+  padding: 4px;
+}
+
+.App-table td input::placeholder {
+  color: #fff;
+  text-align: center;
 }

@@ -14,15 +14,18 @@ export default function useEmployees() {
     [employeesList]
   );
 
-  useEffect(async () => {
-    await setEmployeesList(
-      employeesData.map(({ name, jobTitle, tenure, gender }) => ({
-        name,
-        jobTitle,
-        tenure,
-        gender,
-      }))
-    );
+  useEffect(() => {
+    async function fetchData() {
+      await setEmployeesList(
+        employeesData.map(({ name, jobTitle, tenure, gender }) => ({
+          name,
+          jobTitle,
+          tenure,
+          gender,
+        }))
+      );
+    }
+    fetchData();
   }, []);
 
   return { employeesList, handleAddNewEmployee };

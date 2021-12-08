@@ -1,32 +1,54 @@
-import React, { useEffect, memo } from "react";
+import React, { useEffect, memo, useMemo } from "react";
+import PropTypes from "prop-types";
 
 import Chart from "chart.js/auto";
 
+const labels = ["Male", "Female"];
+
 const BarChart = memo(function BarChart({ malesCount, femalesCount }) {
-  const labels = ["Male", "Female"];
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: "Employees by gender",
-        backgroundColor: ["#fff", "#0a1f49"],
-        barPercentage: 0.5,
-        borderColor: "white",
-        data: [malesCount, femalesCount],
-      },
-    ],
-  };
-  const config = {
-    type: "bar",
-    data: data,
-    options: {},
-  };
+  const data = useMemo(
+    () => ({
+      labels: labels,
+      datasets: [
+        {
+          label: "Employees by gender",
+          backgroundColor: ["#fff", "#0a1f49"],
+          barPercentage: 0.5,
+          borderColor: "white",
+          data: [malesCount, femalesCount],
+        },
+      ],
+    }),
+    [malesCount, femalesCount]
+  );
+  const config = useMemo(
+    () => ({
+      type: "bar",
+      data: data,
+      options: {},
+    }),
+    [data]
+  );
 
   useEffect(() => {
-    const myChart = new Chart(document.getElementById("barChart"), config);
-  }, []);
+    const chart = new Chart(document.getElementById("barChart"), config);
+    chart.update();
 
-  return <></>;
+    return () => {
+      chart.destroy();
+    };
+  }, [config]);
+
+  return (
+    <div className={"App-BarChart"}>
+      <canvas id="barChart" />
+    </div>
+  );
 });
+
+BarChart.propTypes = {
+  malesCount: PropTypes.number,
+  femalesCount: PropTypes.number,
+};
 
 export default BarChart;
