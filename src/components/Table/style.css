@@ -6,7 +6,10 @@
   width: 100%;
   margin-bottom: 40px;
   max-height: 680px;
-  overflow-y: auto;
+  overflow-y: scroll;
+  display: block;
+  position: relative;
+  z-index: 100;
 }
 
 .App-table td,

@@ -25,7 +25,6 @@ export default function Table() {
       tenure: newEmployeeData.tenure,
       gender: newEmployeeData.gender,
     });
-    console.log(employeesList);
   }, [newEmployeeData, handleAddNewEmployee]);
 
   const inputHandler = useCallback(
