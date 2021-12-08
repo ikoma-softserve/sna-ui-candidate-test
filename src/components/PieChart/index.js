@@ -15,7 +15,7 @@ const PieChart = memo(function BarChart({
     datasets: [
       {
         label: "Employees by job title",
-        backgroundColor: "white",
+        backgroundColor: ["#fff", "#46639c", "#8096c2", "#0a1f49"],
         barPercentage: 0.5,
         borderColor: "white",
         data: [developersCount, QAsCount, CEOsCount, marketingSpecialistCount],

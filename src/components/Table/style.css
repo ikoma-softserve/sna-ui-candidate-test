@@ -15,23 +15,30 @@
   padding: 8px;
   position: relative;
   height: 40px;
+  width: 25%;
 }
 
 .App-table tr:hover {
-  background-color: #ddd;
+  background-color: #8096c2;
 }
 
 .App-table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #4caf50;
+  background-color: #0a1f49;
   color: white;
 }
 
 .App-table td input {
-  position: absolute;
-  top: 25%;
-  left: 20%;
   z-index: 3;
+  background: transparent;
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+}
+
+.App-table td input:placeholder {
+  color: white;
 }

@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useCallback,
-  useState,
-  useMemo,
-  useEffect,
-} from "react";
+import React, { useContext, useCallback, useState } from "react";
 
 import { EmployeesContext } from "../../context";
 
@@ -113,7 +107,7 @@ export default function Table() {
         style={{
           width: "120px",
           height: "40px",
-          background: "white",
+          background: "#8096c2",
           marginLeft: "auto",
           marginBottom: "40px",
         }}

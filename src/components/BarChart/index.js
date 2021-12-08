@@ -9,7 +9,7 @@ const BarChart = memo(function BarChart({ malesCount, femalesCount }) {
     datasets: [
       {
         label: "Employees by gender",
-        backgroundColor: "white",
+        backgroundColor: ["#fff", "#0a1f49"],
         barPercentage: 0.5,
         borderColor: "white",
         data: [malesCount, femalesCount],
