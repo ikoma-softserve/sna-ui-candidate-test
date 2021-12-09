@@ -61,3 +61,12 @@ select {
   color: #fff;
   text-align: center;
 }
+
+.App-table-Btn {
+  width: 120px;
+  height: 40px;
+  background: #8096c2;
+  margin-left: auto;
+  margin-bottom: 40px;
+  border: none;
+}

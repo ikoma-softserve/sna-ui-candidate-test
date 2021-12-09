@@ -157,13 +157,7 @@ export default function Table() {
       <Button
         label={"Add employee"}
         onClick={handleOnClickAddEmployee}
-        style={{
-          width: "120px",
-          height: "40px",
-          background: "#8096c2",
-          marginLeft: "auto",
-          marginBottom: "40px",
-        }}
+        classes={"App-table-Btn"}
       />
 
       <table className={"App-table"}>
