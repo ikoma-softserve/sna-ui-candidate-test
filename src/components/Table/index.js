@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useState } from "react";
+import React, { useContext, useCallback, useState, useMemo } from "react";
 
 import { EmployeesContext } from "../../context";
 
@@ -17,6 +17,42 @@ export default function Table() {
     tenure: 0,
     gender: "",
   });
+
+  const [sortConfig, setSortConfig] = useState({
+    fieldToSort: "name",
+    direction: "ascending",
+  });
+
+  const sortedList = useMemo(() => {
+    let sortedItems = [...employeesList];
+
+    sortedItems.sort((el, nextEl) => {
+      if (el[sortConfig.fieldToSort] < nextEl[sortConfig.fieldToSort]) {
+        // want to inform about weird issue with the different tenure values
+        return sortConfig.direction === "ascending" ? -1 : 1;
+      } else if (el[sortConfig.fieldToSort] > nextEl[sortConfig.fieldToSort]) {
+        return sortConfig.direction === "ascending" ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+
+    return sortedItems;
+  }, [employeesList, sortConfig]);
+
+  const toggleListSorting = useCallback(
+    (fieldToSort) => {
+      let direction = "ascending";
+      if (
+        sortConfig.fieldToSort === fieldToSort &&
+        sortConfig.direction === "ascending"
+      ) {
+        direction = "descending";
+      }
+      setSortConfig({ fieldToSort, direction });
+    },
+    [sortedList]
+  );
 
   const handleOnClickAddEmployee = useCallback(() => {
     handleAddNewEmployee({
@@ -89,8 +125,18 @@ export default function Table() {
     )
   );
 
+  const renderTableHeader = useCallback(() => {
+    let header = Object.keys(employeesList?.[0] ?? {});
+
+    return header?.map((el, index) => (
+      <th onClick={() => toggleListSorting(el)} key={index}>
+        {el.toUpperCase()}
+      </th>
+    ));
+  }, [employeesList, toggleListSorting]);
+
   const renderTableData = useCallback(() => {
-    const tableList = employeesList.map(
+    const tableList = sortedList.map(
       ({ name, jobTitle, tenure, gender }, idx) => (
         <tr key={idx}>
           <td>{name}</td>
@@ -104,15 +150,7 @@ export default function Table() {
     tableList.push(<tr key={"set"}>{newEmployeeTdArr}</tr>);
 
     return tableList;
-  }, [employeesList, newEmployeeTdArr]);
-
-  const renderTableHeader = useCallback(() => {
-    let header = Object.keys(employeesList?.[0] ?? {});
-
-    return header?.map((key, index) => {
-      return <th key={index}>{key.toUpperCase()}</th>;
-    });
-  }, [employeesList]);
+  }, [sortedList, newEmployeeTdArr]);
 
   return (
     <>
@@ -129,12 +167,10 @@ export default function Table() {
       />
 
       <table className={"App-table"}>
-        {employeesList && (
-          <>
-            <tr>{renderTableHeader()}</tr>
-            <tbody>{renderTableData()}</tbody>
-          </>
-        )}
+        <thead>
+          <tr>{renderTableHeader()}</tr>
+        </thead>
+        <tbody>{renderTableData()}</tbody>
       </table>
     </>
   );
